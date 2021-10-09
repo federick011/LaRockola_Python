@@ -15,50 +15,25 @@ from django.contrib.auth import authenticate, login, logout
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()"""
 
-class ProfileAPI (viewsets.ModelViewSet):
-    authentication_classes = (authentication.SessionAuthentication,)
-    permission_classes = (permissions.IsAuthenticated, AccesoPerfil)
-    serializer_class = ProfileSerializer
-    queryset = Perfil.objects.all()
-
-class UserSeriAPI(viewsets.ModelViewSet):
-    authentication_classes = (authentication.SessionAuthentication,)
-    permission_classes = (permissions.IsAuthenticated, AccesoPerfil)
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-
-
-class SongsSeriAPI(viewsets.ModelViewSet):
-    serializer_class = SongsSerializer
-    queryset = Canciones.objects.all()
+class ArtistSeriAPI(viewsets.ModelViewSet):
+    serializer_class = ArtistSerializer
+    queryset = Musico.objects.all()
 
 class GenderSeriAPI(viewsets.ModelViewSet):
     serializer_class = GenderSerializer
     queryset = GeneroMusical.objects.all()
 
-class RegisterAPI(views.APIView):
-    def post(self, request):
-        usuario = UserSerializer(data=request.data)
-        if usuario.is_valid():
-            #¿Información válida?
-            usuario.save()
-            return Response({"Bienvenido": True})
-        return Response(usuario.errors, HTTP_400_BAD_REQUEST)
+class AlbumSeriAPI(viewsets.ModelViewSet):
+    serializer_class = AlbumSerializer
+    queryset = Album.objects.all()
 
-class LoginAPI(views.APIView):
-    def post(self, request):
-        usuario = authenticate(request, username=request.data['username'], password = request.data['password'])
-        if not usuario is None:
-            login(request, usuario)
-            return Response({"Bienvenido": True})
-        return Response({"Bienvenido": False})
+class SongsSeriAPI(viewsets.ModelViewSet):
+    serializer_class = SongsSerializer
+    queryset = Canciones.objects.all()
 
-class LogoutAPI(views.APIView):
-    authentication_classes = (authentication.SessionAuthentication,)
-    permission_classes = (permissions.IsAuthenticated, AccesoPerfil)
-    def get(self, request):
-        logout(request)
-        return Response({"Adiós":True})
+class PlayListAPI(viewsets.ModelViewSet):
+    serializer_class = PlayListSerializer
+    queryset = Playlist.objects.all()
 
 #def Prueba(request):
     #Info del usuario

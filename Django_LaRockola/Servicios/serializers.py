@@ -5,24 +5,19 @@ from django.contrib.auth.models import User, Group
 from Servicios.models import *
 from django.contrib.auth import get_user_model
 
-class UserSerializer(serializers.ModelSerializer):
+class ArtistSerializer(serializers.ModelSerializer):
     class Meta():
-        model = User
-        fields = ["username", "password", "email"]
-        extra_kwargs = {
-            'password':{'write_only':True}, 
-            "style":{'input_type': 'password'}
-            }
-
-class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta():
-        model = Perfil
+        model = Musico
         fields = "__all__"
-        
 
 class GenderSerializer(serializers.ModelSerializer):
     class Meta():
         model = GeneroMusical
+        fields = "__all__"
+
+class AlbumSerializer(serializers.ModelSerializer):
+    class Meta():
+        model = Album
         fields = "__all__"
 
 class SongsSerializer(serializers.ModelSerializer):
@@ -30,7 +25,10 @@ class SongsSerializer(serializers.ModelSerializer):
         model = Canciones
         fields = "__all__"
 
-
+class PlayListSerializer(serializers.ModelSerializer):
+    class Meta():
+        model = Playlist
+        fields = "__all__"
 
 
 

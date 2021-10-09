@@ -22,4 +22,5 @@ from Servicios.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('servicios/api/', include('Servicios.urls')),
+    path('usuarios/api/',include('Usuarios.urls'))
 ]

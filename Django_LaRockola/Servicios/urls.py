@@ -4,16 +4,12 @@ from rest_framework.routers import DefaultRouter
 from Servicios.views import *
 
 router = DefaultRouter()
-router.register('usuarios', UserSeriAPI)
-router.register('listacanciones', SongsSeriAPI)
+router.register('usuarios', ArtistSeriAPI)
 router.register('generos', GenderSeriAPI)
-router.register('perfiles', ProfileAPI)
-
+router.register('perfiles', AlbumSeriAPI)
+router.register('listacanciones', SongsSeriAPI)
 
 urlpatterns = [
     #path('ejemplo', Prueba)
     path('crud/', include(router.urls)),
-    path('register', RegisterAPI.as_view()),
-    path('login', LoginAPI.as_view()),
-    path('logout', LogoutAPI.as_view())
 ]
